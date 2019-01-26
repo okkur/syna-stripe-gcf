@@ -1,10 +1,10 @@
 const app = require('express')();
-const http = require('http').Server(app);
 const stripe = require('stripe')(
-  "your_stripe_key" || process.env.STRIPE_KEY
+  process.env.STRIPE_KEY || "your_stripe_key"
 );
 const cors = require('cors');
 const bodyParser = require("body-parser");
+const port = process.env.PORT || 3000
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -14,14 +14,20 @@ app.use(cors());
 exports.chargeCustomer = app.post(
   "/charge",
   function chargeCustomer(req, res) {
-    const { product, price, price_text, currency, from, stripeToken } = req.body;
-    console.log('Request:', { product, price, price_text, currency, from })
+    const { currency, custom_value, email, from, price, price_text, product, stripeToken } = req.body;
+    console.log('Request:', { currency, custom_value, email, from, price, price_text, product, stripeToken });
+    const stripeRequestData = {
+      source: stripeToken,
+      currency: currency,
+      amount: price
+    };
+
+    if (email) {
+      stripeRequestData.receipt_email = email;
+    }
+
     stripe.charges.create(
-      {
-        source: stripeToken,
-        currency: currency,
-        amount: price
-      },
+      stripeRequestData,
       function(err, charge) {
         if (err) {
           return res.status(406).send(JSON.stringify(err));
@@ -31,3 +37,5 @@ exports.chargeCustomer = app.post(
     );
   }
 );
+
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))

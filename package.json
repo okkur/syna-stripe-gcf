@@ -5,6 +5,9 @@
   "repository": "git@github.com:mpourismaiel/syna-stripe-gcf.git",
   "author": "Ryan Daulton <rldaulton@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "dev:charge": "node ./Charge\\ Customer/index.js"
+  },
   "devDependencies": {
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",

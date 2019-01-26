@@ -1,7 +1,7 @@
 var app = require('express')();
 var http = require('http').Server(app);
 var stripe = require('stripe')(
-  "your_stripe_key" || process.env.STRIPE_KEY
+  process.env.STRIPE_KEY || "your_stripe_key"
 );
 var bodyParser = require('body-parser');
 
