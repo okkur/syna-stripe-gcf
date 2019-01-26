@@ -14,12 +14,13 @@ app.use(cors());
 exports.chargeCustomer = app.post(
   "/charge",
   function chargeCustomer(req, res) {
-    const { currency, custom_value, email, from, price, price_text, product, stripeToken } = req.body;
-    console.log('Request:', { currency, custom_value, email, from, price, price_text, product, stripeToken });
+    const { currency, price, stripeToken, email, metadata } = req.body;
+    console.log('Request:', { currency, email, price, stripeToken, metadata: metadata || {} });
     const stripeRequestData = {
       source: stripeToken,
       currency: currency,
-      amount: price
+      amount: price,
+      metadata: metadata || {},
     };
 
     if (email) {
