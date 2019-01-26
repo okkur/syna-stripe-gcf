@@ -1,24 +1,33 @@
-var app = require('express')();
-var http = require('http').Server(app);
-var stripe = require('stripe')(
-  "your_stripe_key"
+const app = require('express')();
+const http = require('http').Server(app);
+const stripe = require('stripe')(
+  "your_stripe_key" || process.env.STRIPE_KEY
 );
-var bodyParser = require('body-parser');
+const cors = require('cors');
+const bodyParser = require("body-parser");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cors());
 
 //initiate a one-off charge for a customer
-exports.chargeCustomer = app.get(".../charge/:customerid/:token/:amount", function chargeCustomer (req,res){
-  stripe.charges.create({
-    customer: req.params.customerid,
-    source: req.params.token,
-    currency: 'usd',
-    amount:req.params.amount
-  },function(err, charge) {
-    if(err) {
-      return res.send(JSON.stringify(err));
-    }
-    res.send(JSON.stringify(charge));
-  });
-});
+exports.chargeCustomer = app.post(
+  "/charge",
+  function chargeCustomer(req, res) {
+    const { product, price, price_text, currency, from, stripeToken } = req.body;
+    console.log('Request:', { product, price, price_text, currency, from })
+    stripe.charges.create(
+      {
+        source: stripeToken,
+        currency: currency,
+        amount: price
+      },
+      function(err, charge) {
+        if (err) {
+          return res.status(406).send(JSON.stringify(err));
+        }
+        res.status(200).send(JSON.stringify(charge));
+      }
+    );
+  }
+);
