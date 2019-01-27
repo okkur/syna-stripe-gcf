@@ -39,4 +39,4 @@ exports.chargeCustomer = app.post(
   }
 );
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port, () => console.log(`Stripe Charge Customer GCF server listening on port ${port}!`))

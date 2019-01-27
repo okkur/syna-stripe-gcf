@@ -2,7 +2,7 @@
   "name": "syna-stripe-gcf",
   "version": "0.1.0",
   "main": "index.js",
-  "repository": "git@github.com:mpourismaiel/syna-stripe-gcf.git",
+  "repository": "git@github.com:okkur/syna-stripe-gcf.git",
   "author": "Ryan Daulton <rldaulton@gmail.com>",
   "license": "MIT",
   "scripts": {
