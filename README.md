@@ -1,4 +1,4 @@
-![logo](Screenshots/GCF-Stripe.png)
+![logo](screenshots/GCF-Stripe.png)
 
 ### Containerize and flatten your payment processing server into microservices using GCF.
 
@@ -15,7 +15,7 @@ Check out the folders in the `master` branch where you'll find different request
 
 2.) Once logged in to your Cloud Platform Console, select the hamburger menu on the left, and enter the "Cloud Functions" management section.
 
-![gcf-menu](Screenshots/gcf-menu.png)
+![gcf-menu](screenshots/gcf-menu.png)
 
 3.) From here, you will create a new cloud function, ensuring to select `HTTP Trigger` as the Trigger option.
 
@@ -23,9 +23,9 @@ Check out the folders in the `master` branch where you'll find different request
 
 4.) Select `Inline Editor` under the Source code option, or upload your own version, using the code supplied in this repo.
 
-5.) Ensure that you have replaced the pieces of code, where necessary, with your Stripe information - most importantly your [Stripe Keys](https://github.com/rldaulton/GCF-Stripe/blob/36f0bef34cfd0d37676208cdec7119c3bdca244a/Charge%20Customer/index.js#L4), which you can find in your Stripe Dashboard under `Dashboard > API`.
+5.) Ensure that you have replaced the pieces of code, where necessary, with your Stripe information - most importantly your [Stripe Keys](https://github.com/rldaulton/GCF-Stripe/blob/36f0bef34cfd0d37676208cdec7119c3bdca244a/charge-customer/index.js#L4), which you can find in your Stripe Dashboard under `Dashboard > API`.
 
-6.) Once deployed, use your client to call the endpoint for your function & supply the correct [parameters encoded](https://github.com/rldaulton/GCF-Stripe/blob/96fc38fc0220aee9a0ecaee718a8b0edf1db18d8/Charge%20Customer/index.js#L12) in the `URL` to interact with the Stripe API.
+6.) Once deployed, use your client to call the endpoint for your function & supply the correct [parameters encoded](https://github.com/rldaulton/GCF-Stripe/blob/96fc38fc0220aee9a0ecaee718a8b0edf1db18d8/charge-customer/index.js#L12) in the `URL` to interact with the Stripe API.
 
 Happy serverless computing!
 
