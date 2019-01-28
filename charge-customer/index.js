@@ -23,7 +23,7 @@ exports.chargeCustomer = app.post(
       metadata: metadata || {},
     };
 
-    if (email) {
+    if (process.env.STRIPE_AUTO_SEND === "true" && email) {
       stripeRequestData.receipt_email = email;
     }
 
